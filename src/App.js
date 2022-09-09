@@ -11,7 +11,7 @@ dayjs.extend(timezone);
 
 const defaultMinColor = "#ffffff";
 const defaultMaxColor = "#57bb8a";
-const fontColor = "#9a2c53";
+const fontColor = "#003850";
 const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const hours = [0, 3, 6, 9, 12, 15, 18, 21];
 
@@ -61,7 +61,7 @@ function generateImage(data, width, height) {
 
   data.forEach((row, rowIndex) => {
     row.forEach((color, columnIndex) => {
-      if (color !== "#ffffff") {
+      if (color !== null) {
         ctx.save();
 
         ctx.fillStyle = color;
@@ -139,10 +139,12 @@ function App() {
         }
 
         return acc;
-      }, Array(7).fill(0))
+      }, Array(7).fill())
     );
 
-    const tableDataUniques = Array.from(new Set(tableData.flat()));
+    const tableDataUniques = Array.from(
+      new Set(tableData.flat().filter((x) => typeof x !== "undefined"))
+    );
 
     const minValue = Math.min(...tableDataUniques);
     const maxValue = Math.max(...tableDataUniques);
@@ -150,13 +152,14 @@ function App() {
     const maxColor = colors.maxColor.slice(1);
 
     const colorTableData = tableData.map((row) =>
-      row.map(
-        (value) =>
-          `#${interpolateColor(
-            minColor,
-            maxColor,
-            getPercentageBetweenMinMax(value, minValue, maxValue)
-          )}`
+      row.map((value) =>
+        typeof value !== "undefined"
+          ? `#${interpolateColor(
+              minColor,
+              maxColor,
+              getPercentageBetweenMinMax(value, minValue, maxValue)
+            )}`
+          : null
       )
     );
 
