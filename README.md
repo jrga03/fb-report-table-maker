@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/42d74604-362e-46bd-9b2a-5fdc86736668/deploy-status)](https://app.netlify.com/sites/fb-report-table-maker/deploys)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
