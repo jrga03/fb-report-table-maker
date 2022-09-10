@@ -17,6 +17,7 @@ const FORM_DEFAULT_VALUES = {
   minColor: "#ffffff",
   maxColor: "#57bb8a",
   fontColor: "#003850",
+  borderColor: "#cccccc",
   fontFamily: "sans-serif",
   fontSize: 18
 };

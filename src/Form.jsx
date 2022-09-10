@@ -92,6 +92,22 @@ const Form = ({ onSubmit, defaultValues }) => {
             <span className="ml-2 uppercase text-sm">{defaultValues.fontColor}</span>
           </div>
         </div>
+
+        <div>
+          <label htmlFor="borderColor" className="font-semibold mb-2 text-gray-700">
+            Border color:
+          </label>
+          <div className="flex items-center">
+            <input
+              type="color"
+              id="borderColor"
+              name="borderColor"
+              defaultValue={defaultValues.borderColor}
+              required
+            />
+            <span className="ml-2 uppercase text-sm">{defaultValues.borderColor}</span>
+          </div>
+        </div>
       </div>
 
       <div className="mt-8 flex justify-center items-center">
