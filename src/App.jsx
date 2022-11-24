@@ -3,6 +3,7 @@ import Papa from "papaparse";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import get from "lodash/get";
 
 import { download, getPercentageBetweenMinMax, interpolateColor } from "./utils";
 import { generateImage } from "./generateImage";
@@ -91,11 +92,13 @@ function App() {
 
     const keys = data[0];
 
-    const hasPostTime = keys.includes("Post time");
-    const hasReach = keys.includes("Reach");
+    const hasPostTime = keys.includes("Post time") || keys.includes("Publish Time");
+    const hasReach = keys.includes("Reach") || keys.includes("People Reached");
 
     if (!hasPostTime || !hasReach) {
-      alert('Invalid CSV. \n\nData should have "Post time" and "Reach" as columns.');
+      alert(
+        'Invalid CSV. \n\nData should have "Post time"/"Publish Time" and "Reach"/"People Reached" as columns.'
+      );
       return;
     }
 
@@ -106,7 +109,10 @@ function App() {
         return Object.fromEntries(entries);
       })
       .map((value) => {
-        const origPostTime = dayjs(value["Post time"]).tz("America/Los_Angeles", true).format();
+        const postTime = get(value, "Post time", get(value, "Publish Time"));
+        const reach = get(value, "Reach", get(value, "People Reached"));
+
+        const origPostTime = dayjs(postTime).tz("America/Los_Angeles", true).format();
         const phPostTime = dayjs(origPostTime).tz("Asia/Manila").local().format();
         const dayjsPhPostTime = dayjs(phPostTime);
         const hour = dayjsPhPostTime.hour();
@@ -118,7 +124,7 @@ function App() {
           phPostTime,
           hour,
           dayOfWeek,
-          reach: Number.parseInt(value.Reach, 10)
+          reach: Number.parseInt(reach, 10)
         };
       });
 
