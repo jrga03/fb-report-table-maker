@@ -1,4 +1,17 @@
+import { useState } from "react";
+
 const Form = ({ onSubmit, defaultValues }) => {
+  const [colors, setColors] = useState(defaultValues);
+
+  const onChangeColor = (e) => {
+    const { name, value } = e.target;
+
+    setColors((colors) => ({
+      ...colors,
+      [name]: value
+    }));
+  };
+
   return (
     <form className="w-full flex flex-col" onSubmit={onSubmit}>
       <label htmlFor="csv" className="font-semibold mb-2 text-gray-700">
@@ -18,8 +31,9 @@ const Form = ({ onSubmit, defaultValues }) => {
               name="minColor"
               defaultValue={defaultValues.minColor}
               required
+              onChange={onChangeColor}
             />
-            <span className="ml-2 uppercase text-sm">{defaultValues.minColor}</span>
+            <span className="ml-2 uppercase text-sm">{colors.minColor}</span>
           </div>
         </div>
 
@@ -34,8 +48,9 @@ const Form = ({ onSubmit, defaultValues }) => {
               name="maxColor"
               defaultValue={defaultValues.maxColor}
               required
+              onChange={onChangeColor}
             />
-            <span className="ml-2 uppercase text-sm">{defaultValues.maxColor}</span>
+            <span className="ml-2 uppercase text-sm">{colors.maxColor}</span>
           </div>
         </div>
 
@@ -88,8 +103,9 @@ const Form = ({ onSubmit, defaultValues }) => {
               name="fontColor"
               defaultValue={defaultValues.fontColor}
               required
+              onChange={onChangeColor}
             />
-            <span className="ml-2 uppercase text-sm">{defaultValues.fontColor}</span>
+            <span className="ml-2 uppercase text-sm">{colors.fontColor}</span>
           </div>
         </div>
 
@@ -104,8 +120,9 @@ const Form = ({ onSubmit, defaultValues }) => {
               name="borderColor"
               defaultValue={defaultValues.borderColor}
               required
+              onChange={onChangeColor}
             />
-            <span className="ml-2 uppercase text-sm">{defaultValues.borderColor}</span>
+            <span className="ml-2 uppercase text-sm">{colors.borderColor}</span>
           </div>
         </div>
       </div>
