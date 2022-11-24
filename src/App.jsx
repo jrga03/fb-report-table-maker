@@ -25,6 +25,7 @@ const FORM_DEFAULT_VALUES = {
 
 function App() {
   const [imgSrc, setImgSrc] = useState(null);
+  const [formKey, setFormKey] = useState();
 
   // useEffect(() => {
   //   (async function () {
@@ -143,6 +144,8 @@ function App() {
       skipEmptyLines: true,
       complete: (res) => onParseComplete(res, formData)
     });
+
+    setFormKey(Date.now());
   };
 
   const onClickDownload = (e) => {
@@ -154,7 +157,7 @@ function App() {
     <main className="h-full w-full flex justify-center p-8 overflow-x-hidden">
       <div className="w-full container max-w-3xl">
         <div className="w-full">
-          <Form defaultValues={FORM_DEFAULT_VALUES} onSubmit={onSubmit} />
+          <Form key={formKey} defaultValues={FORM_DEFAULT_VALUES} onSubmit={onSubmit} />
 
           {imgSrc && (
             <div className="w-full max-w-3xl object-contain my-4 pb-8 flex flex-col items-center">
