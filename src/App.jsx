@@ -92,12 +92,14 @@ function App() {
 
     const keys = data[0];
 
-    const hasPostTime = keys.includes("Post time") || keys.includes("Publish Time");
+    console.log(keys);
+
+    const hasPostTime = keys.includes("Post time") || keys.includes("Publish time");
     const hasReach = keys.includes("Reach") || keys.includes("People Reached");
 
     if (!hasPostTime || !hasReach) {
       alert(
-        'Invalid CSV. \n\nData should have "Post time"/"Publish Time" and "Reach"/"People Reached" as columns.'
+        'Invalid CSV. \n\nData should have "Post time"/"Publish time" and "Reach"/"People Reached" as columns.'
       );
       return;
     }
@@ -109,7 +111,7 @@ function App() {
         return Object.fromEntries(entries);
       })
       .map((value) => {
-        const postTime = get(value, "Post time", get(value, "Publish Time"));
+        const postTime = get(value, "Post time", get(value, "Publish time"));
         const reach = get(value, "Reach", get(value, "People Reached"));
 
         const origPostTime = dayjs(postTime).tz("America/Los_Angeles", true).format();
