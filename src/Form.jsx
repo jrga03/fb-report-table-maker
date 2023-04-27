@@ -8,7 +8,7 @@ const Form = ({ onSubmit, defaultValues }) => {
 
     setColors((colors) => ({
       ...colors,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -123,6 +123,39 @@ const Form = ({ onSubmit, defaultValues }) => {
               onChange={onChangeColor}
             />
             <span className="ml-2 uppercase text-sm">{colors.borderColor}</span>
+          </div>
+        </div>
+
+        <div>
+          <div className="flex items-center gap-4">
+            <label htmlFor="capMaxValue" className="block font-semibold mb-2 text-gray-700">
+              Cap Max Value?
+            </label>
+            <input
+              type="checkbox"
+              id="capMaxValue"
+              name="capMaxValue"
+              defaultChecked={defaultValues.capMaxValue}
+            />
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="maxValue" className="block font-semibold mb-2 text-gray-700">
+            Max value:
+          </label>
+          <div>
+            <input
+              type="number"
+              name="maxValue"
+              id="maxValue"
+              className="block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
+              defaultValue={defaultValues.maxValue}
+              min="0"
+              max={Number.MAX_SAFE_INTEGER}
+              step="1"
+              required
+            />
           </div>
         </div>
       </div>
