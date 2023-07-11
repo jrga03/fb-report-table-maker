@@ -19,7 +19,7 @@ const FORM_DEFAULT_VALUES = {
   borderColor: "#cccccc",
   fontFamily: "sans-serif",
   fontSize: 18,
-  capMaxValue: false,
+  capMaxValue: true,
   maxValue: 1000,
 };
 
